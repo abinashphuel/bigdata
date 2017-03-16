@@ -139,25 +139,6 @@ HBase Shell Command
 	3 row(s) in 0.1410 seconds
 
 
-10. Drop Table
-	hbase(main):003:0> disable 'test'
 
-	SUCCESS:
-	0 row(s) in 2.2930 seconds
-
-	hbase(main):004:0> drop 'test'
-
-	SUCCESS:	
-	0 row(s) in 1.2660 seconds
-
-	hbase(main):005:0> scan 'test'
-
-	SUCCESS:
-	ROW                   COLUMN+CELL                                               
-
-	ERROR: Unknown table test!
-
-==========================================================================================
-
-	
+10.
 
