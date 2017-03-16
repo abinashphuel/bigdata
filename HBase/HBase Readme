@@ -1,0 +1,17 @@
+Start all services related to HBase
+1. List all Services
+	$ service --status-all
+
+2.Start the services
+
+	$ sudo service hbase-regionserver start
+
+	$ sudo service hbase-regionserver start
+
+	$ sudo service hbase-solr-indexer start
+
+If services start then will see like this
+Started HBase Solr Indexer (hbase-solr-indexer) :          [  OK  ]
+
+==========================
+
