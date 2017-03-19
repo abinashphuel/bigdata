@@ -23,7 +23,7 @@ How to quit scala 2.11.0 REPL?
 
 	scala> :q
 
-================================================
+=============================================================================
 BASIC:
 
 				REPL -> Read Evaluate Print Loop
@@ -209,7 +209,11 @@ var: mutable variable...it can be changed--->(READ_WRITE)
 
 
 
-	--->for loop generators with guards:
+	--->for loop generators with guards: (FOR LOOP WITH GAURD CONDITION) <- for with if inside
+
+		scala> for(i <- 0 to 20 if i %2 == 0) print (i + ", ")
+		0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 
+
 		scala> for {
 		     |     i <- 1 to 10
 		     |     if i < 4
@@ -241,6 +245,7 @@ var: mutable variable...it can be changed--->(READ_WRITE)
 		Suren
 		Pradeep		
 
+	---> for/yield operation store data of each for loop in a list (Vector)
 		scala> val lenght = for(n <- names) yield (n.length)
 		lenght: Seq[Int] = List(3, 5, 7)
 
