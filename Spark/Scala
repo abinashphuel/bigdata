@@ -230,6 +230,9 @@ var: mutable variable...it can be changed--->(READ_WRITE)
 		     | } println(i)
 		4
 
+		
+
+
 	--->different uses of for
 		scala> val names = Seq("abi", "suren", "pradeep")
 		names: Seq[String] = List(abi, suren, pradeep)
@@ -271,11 +274,58 @@ var: mutable variable...it can be changed--->(READ_WRITE)
 
 ~~~~~~~http://alvinalexander.com/scala/scala-for-loop-examples-syntax-yield-foreach~~~~~~~
 
-	
 
+====================================================================================
+Function:
+	syntax:
+		def function_name(function params): return_type = {
+			code goes here...
+		}	
 
+	---> Return type : NULL
+		scala> def areaRect(l: Double, b:Double): Unit = {
+		     | println ("Area is " + l * b)
+		     | }
+		areaRect: (l: Double, b: Double)Unit
 
+		scala> areaRect(10,2)
+		Area is 20.0
 
+	---> Return type : XXX
+
+		scala> def areaRect(l: Double , b:Double): Double ={
+		     | l * b
+		     | }
+		areaRect: (l: Double, b: Double)Double
+
+		scala> areaRect(10,2.5)
+		res3: Double = 25.0
+
+		scala> def isEvenNumber(num: Int): Boolean = {
+		     | num % 2 == 0
+		     | }
+		isEvenNumber: (num: Int)Boolean
+
+		scala> isEvenNumber(101)
+		res0: Boolean = false
+
+	---> Default argument (always give default arguments at the end)
+		scala> def areaRect(l: Double, b:Double = 5.5): Double = {
+		     | l * b
+		     | }
+		areaRect: (l: Double, b: Double)Double
+
+		scala> areaRect(10)
+		res4: Double = 55.0
+
+		scala> areaRect(10, 7.7)
+		res5: Double = 77.0
+		----------Bad Practice--------------> always keep default argument in the end
+		scala> areaRect(l = 10, b = 4.3 )
+		res6: Double = 43.0
+
+		scala> areaRect( b = 4.3, l = 9 )
+		res7: Double = 38.699999999999996
 ~~~~~~~
 https://scalafiddle.io/
 https://www.youtube.com/watch?v=xNAD6cBKyaA&index=3&list=PL9ooVrP1hQOGyFc60sExNX1qBWJyV5IMb
