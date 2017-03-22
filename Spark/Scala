@@ -1,0 +1,332 @@
+MAIN TOPIC:
+---Sub TOpic :
+	--->Sub Sub Topic
+	
+~~~~~~~Reference~~~~~~~
+
+
+SPARK SCALA START
+1. go to spark directory
+2. $ ./bin/spark-shell
+3. scala shell will start
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.1.0
+      /_/
+Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_121)
+
+scala> 
+
+How to quit scala 2.11.0 REPL?
+
+	scala> :q
+
+=============================================================================
+BASIC:
+
+				REPL -> Read Evaluate Print Loop
+
+---Expression:
+	scala> println(1)
+	1
+
+	scala> println("Hello" + " " + "WORLD!")
+	Hello WORLD!
+
+
+---Variable
+val: immutable variable....it can't be changed--->(READ ONLY)
+var: mutable variable...it can be changed--->(READ_WRITE)
+
+	----val:immutable
+	scala> val x: Int = 10
+	x: Int = 10
+
+	scala> x = 11
+	<console>:19: error: reassignment to val
+	       x = 11
+		 ^
+
+	----var:mutable
+	scala> var x: Int = 10
+	x: Int = 10
+
+	scala> x = 11
+	x: Int = 11
+
+---Lazy loading OR undemand loading :
+
+	->In case of normal initialization when variable is created memory space is given to it
+	->BUT in case of lazy loading no memory is commit when variable is created. But memory is committed when 			there is some computaion.
+
+	scala> val x = 100
+	x: Int = 100
+
+	scala> x*2
+	res3: Int = 200
+
+	scala> lazy val x = 100
+	x: Int = <lazy>
+
+	scala> x * 2
+	res4: Int = 200
+
+
+---Data Types:
+
+	--->Declearing with data type
+		scala> var x: Int = 10
+		x: Int = 10
+
+		scala> var x: Float = 10f
+		x: Float = 10.0
+
+		scala> var x: Double = 10
+		x: Double = 10.0
+
+		scala> var x: Boolean = false
+		x: Boolean = false
+
+
+	--->Type Inference: Declearing without datatype (Types of values can be inferred)
+		scala> val x = 10
+		x: Int = 10
+
+		scala> val x = 10.0
+		x: Double = 10.0
+
+		scala> val x = "Scala"
+		x: String = Scala
+
+		scala> var x = 'a'
+		x: Char = a
+
+		scala> var x = true
+		x: Boolean = true
+
+
+---{} : Block Expression
+	-> In scala, a {} block is a list of expressions, and result is also an expression
+	-> value of block is the value of the last expression of it
+	-> we can assign an anonymous function result to a variable/value in scala
+
+	scala> val x = {val a =100; val b =200; a + b}
+	x: Int = 300
+
+	scala> val x = {
+	     | val a = 100
+	     | val b = 200
+	     | a + b
+	     | }
+	x: Int = 300
+
+---Control Structure : IF-ELSE
+	-> syntax similar as java 
+		if (your test)
+		{
+		  // do something
+		}
+		else if (some test)
+		{
+		// do something
+		}
+		else
+		{
+		// do some default thing
+		}
+
+		scala> var x = 25
+		x: Int = 25
+
+		scala> if (x < 10){
+		     | println(x + "is less than 10")
+		     | }else if(x < 20){
+		     | println(x + "is less than 20 too")
+		     | }else{
+		     | x * 2
+		     | println("Now x become " + x*2 + "so earlier x was " + x ) 
+		     | }
+		Now x become 50so earlier x was 25
+
+
+	-> if-else has a value, of the expression following it ie. Scala if/then statements also return a value.
+
+		scala> var x = 5
+		x: Int = 5
+
+		scala> val s = if(x > 0 && x < 6) 1 else 0 
+		s: Int = 1
+
+		scala> val s = if(x > 0 && x < 6) "Positive" else 0 
+		s: Any = Positive
+
+
+	-> Assigning if statement results in a function
+		scala> def abs(x: Int) = if (x >= 0) x else -x
+		abs: (x: Int)Int
+
+---SWITCH ===> MATCH
+~~~~~~~http://alvinalexander.com/scala/using-match-expression-like-switch-statement~~~~~~~
+
+
+---Iteration: FOR LOOP
+	syntax:
+		for(arg <- collection ) code
+
+	--->single generator: 
+
+		scala> for( i <- 1 to 5) print(i + ",")
+		1,2,3,4,5,
+
+		scala> for(i <- 5 to 1 by -1) print(i + ", ")
+		5, 4, 3, 2, 1, 
+
+		scala> for(i <- 1 to 20 by 2) print(i + ", ")
+		1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 
+
+	--->multiple gemerators:
+
+		scala> for(i <- 1 to 5; j <- 1 to 4)print(i,j)
+		(1,1)(1,2)(1,3)(1,4)(2,1)(2,2)(2,3)(2,4)(3,1)(3,2)(3,3)(3,4)(4,1)(4,2)(4,3)(4,4)(5,1)(5,2)(5,3)(5,4)
+
+		scala> for(i <- 1 to 5; j <- 1 to 4)print(s"($i,$j)")
+		(1,1)(1,2)(1,3)(1,4)(2,1)(2,2)(2,3)(2,4)(3,1)(3,2)(3,3)(3,4)(4,1)(4,2)(4,3)(4,4)(5,1)(5,2)(5,3)(5,4)
+
+
+		scala> val nums = Seq(1,2,3)
+		nums: Seq[Int] = List(1, 2, 3)
+
+		scala> val letters = Seq('a','b','c')
+		letters: Seq[Char] = List(a, b, c)
+
+		scala> val res = for {
+		     | n <- nums
+		     | c <- letters
+		     | } print(n , c)
+		(1,a)(1,b)(1,c)(2,a)(2,b)(2,c)(3,a)(3,b)(3,c)
+
+
+
+	--->for loop generators with guards: (FOR LOOP WITH GAURD CONDITION) <- for with if inside
+
+		scala> for(i <- 0 to 20 if i %2 == 0) print (i + ", ")
+		0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 
+
+		scala> for {
+		     |     i <- 1 to 10
+		     |     if i < 4
+		     | } println(i)
+		1
+		2
+		3
+
+		scala> for {
+		     |     i <- 1 to 10
+		     |     if i > 3
+		     |     if i < 6
+		     |     if i % 2 == 0
+		     | } println(i)
+		4
+
+		
+
+
+	--->different uses of for
+		scala> val names = Seq("abi", "suren", "pradeep")
+		names: Seq[String] = List(abi, suren, pradeep)
+
+		scala> print(names)
+		List(abi, suren, pradeep)
+
+		scala> println(names)
+		List(abi, suren, pradeep)
+
+		scala> for (n <- names) println(n.capitalize) 
+		Abi
+		Suren
+		Pradeep		
+
+	---> for/yield operation store data of each for loop in a list (Vector)
+		scala> val lenght = for(n <- names) yield (n.length)
+		lenght: Seq[Int] = List(3, 5, 7)
+
+		scala> val CapitalizedName = for (n <- names) yield{
+		     | n.capitalize
+		     | }
+		CapitalizedName: Seq[String] = List(Abi, Suren, Pradeep)
+
+
+		scala> for (i <- 0 until names.length){
+			     | println(s"${names(i)}")
+			     | }
+		abi
+		suren
+		pradeep
+
+	----> for/yield is similar to basic map
+		scala> val capitalizedNameMap = names.map(_.capitalize) 
+		capitalizedNameMap: Seq[String] = List(Abi, Suren, Pradeep)
+
+		scala> print(capitalizedNameMap)
+		List(Abi, Suren, Pradeep)
+
+~~~~~~~http://alvinalexander.com/scala/scala-for-loop-examples-syntax-yield-foreach~~~~~~~
+
+
+====================================================================================
+Function:
+	syntax:
+		def function_name(function params): return_type = {
+			code goes here...
+		}	
+
+	---> Return type : NULL
+		scala> def areaRect(l: Double, b:Double): Unit = {
+		     | println ("Area is " + l * b)
+		     | }
+		areaRect: (l: Double, b: Double)Unit
+
+		scala> areaRect(10,2)
+		Area is 20.0
+
+	---> Return type : XXX
+
+		scala> def areaRect(l: Double , b:Double): Double ={
+		     | l * b
+		     | }
+		areaRect: (l: Double, b: Double)Double
+
+		scala> areaRect(10,2.5)
+		res3: Double = 25.0
+
+		scala> def isEvenNumber(num: Int): Boolean = {
+		     | num % 2 == 0
+		     | }
+		isEvenNumber: (num: Int)Boolean
+
+		scala> isEvenNumber(101)
+		res0: Boolean = false
+
+	---> Default argument (always give default arguments at the end)
+		scala> def areaRect(l: Double, b:Double = 5.5): Double = {
+		     | l * b
+		     | }
+		areaRect: (l: Double, b: Double)Double
+
+		scala> areaRect(10)
+		res4: Double = 55.0
+
+		scala> areaRect(10, 7.7)
+		res5: Double = 77.0
+		----------Bad Practice--------------> always keep default argument in the end
+		scala> areaRect(l = 10, b = 4.3 )
+		res6: Double = 43.0
+
+		scala> areaRect( b = 4.3, l = 9 )
+		res7: Double = 38.699999999999996
+~~~~~~~
+https://scalafiddle.io/
+https://www.youtube.com/watch?v=xNAD6cBKyaA&index=3&list=PL9ooVrP1hQOGyFc60sExNX1qBWJyV5IMb
+~~~~~~~
